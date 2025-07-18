@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CepatMakan - Food Ordering System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="Script.js"></script>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h1>CepatMakan</h1>
+                    <p>Fast Food Delivery</p>
+                </div>
+            </div>
+            <div class="header-info">
+                <div class="info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <span>Delivery: 2-4 min</span>
+                </div>
+                <div class="info-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-1">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                    </svg>
+
+                    <span>NAMS Building</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Menu Section -->
+        <section class="menu-section">
+            <h2>Our Menu</h2>
+            
+            <!-- Main Course -->
+            <div class="category-section">
+                <div class="category-header">
+                    <h3>Main Course</h3>
+                    <span class="item-count">4 items</span>
+                </div>
+                <div class="menu-grid">
+                    <!-- This Section Will Be Full Once The Products Are Loaded -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart Section -->
+        <aside class="cart-section">
+            <div class="cart-card">
+                <div class="cart-header">
+                    <h3 class="cart-title">Your Order</h3>
+                    <span class="cart-count">0</span>
+                </div>
+                <div class="cart-content">
+                    <div class="empty-cart">
+                        <p>Your cart is empty</p>
+                    </div>
+
+                    <!-- This section would be populated when items are added -->
+                    <div class="cart-items" style="display: none;">
+                        <div class="cart-item">
+                            <div class="item-info">
+                                <h4>Sample Item</h4>
+                                <p>Rp 15,000 × 1</p>
+                            </div>
+                            <div class="item-controls">
+                                <button class="qty-btn">−</button>
+                                <span>1</span>
+                                <button class="qty-btn">+</button>
+                            </div>
+                            <span>Rp 15,000</span>
+                        </div>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="form-section">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Grade *</label>
+                                <select class="form-select">
+                                    <option value="">Select Grade</option>
+                                    <option value="7">Grade 7</option>
+                                    <option value="8">Grade 8</option>
+                                    <option value="9">Grade 9</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Class *</label>
+                                <select class="form-select">
+                                    <option value="">Select Class</option>
+                                    <option value="A">Class A</option>
+                                    <option value="B">Class B</option>
+                                    <option value="C">Class C</option>
+                                    <option value="D">Class D</option>
+                                    <option value="E">Class E</option>
+                                    <option value="F">Class F</option>
+                                    <option value="G">Class G</option>
+                                    <option value="H">Class H</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Payment methods *</label>
+                                <select class="form-select">
+                                    <option value="">Select payment method</option>
+                                    <option value="Qris">Qris</option>
+                                    <option value="Cash">Cash</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Notes</label>
+                            <textarea class="form-textarea" placeholder="eg. Please put on the table"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="total-section">
+                        <span>Total:</span>
+                        <span class="total-price">Rp 0</span>
+                    </div>
+                    <button class="order-btn" disabled>Place Order</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+</body>
+</html>
