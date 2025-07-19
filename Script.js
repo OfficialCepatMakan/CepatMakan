@@ -51,6 +51,66 @@
     setupQuantityLogic(menuItem, key, item);
     return menuItem;
   }
+  function updateCartDisplay() {
+    const cartCount = document.querySelector('.cart-count');
+    const cartItemsContainer = document.querySelector('.cart-items');
+    const emptyCartMessage = document.querySelector('.empty-cart');
+
+    cartItemsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+      cartItemsContainer.style.display = 'none';
+      emptyCartMessage.style.display = 'block';
+      cartCount.textContent = '0';
+      return;
+    }
+
+    emptyCartMessage.style.display = 'none';
+    cartItemsContainer.style.display = 'block';
+
+    let totalItems = 0;
+
+    cart.forEach((item) => {
+      totalItems += item.quantity;
+
+      const cartItem = document.createElement('div');
+      cartItem.className = 'cart-item';
+
+      cartItem.innerHTML = `
+        <div class="item-info">
+          <h4>${item.name}</h4>
+          <p>Rp ${item.price.toLocaleString('id-ID')} × ${item.quantity}</p>
+        </div>
+        <div class="item-controls">
+          <button class="qty-btn minus">−</button>
+          <span>${item.quantity}</span>
+          <button class="qty-btn plus">+</button>
+        </div>
+      `;
+
+      // Safely get the buttons
+      const minusBtn = cartItem.querySelector('.qty-btn.minus');
+      const plusBtn = cartItem.querySelector('.qty-btn.plus');
+
+      minusBtn.addEventListener('click', () => {
+        item.quantity--;
+        if (item.quantity <= 0) {
+          cart = cart.filter(i => i.key !== item.key);
+        }
+        updateCartDisplay();
+      });
+
+      plusBtn.addEventListener('click', () => {
+        item.quantity++;
+        updateCartDisplay();
+      });
+
+      cartItemsContainer.appendChild(cartItem);
+    });
+
+    cartCount.textContent = totalItems;
+  }
+
 
   function setupQuantityLogic(menuItem, key, item) {
     const qtyBtns = menuItem.querySelectorAll('.qty-btn');
@@ -92,6 +152,6 @@
       qtyDisplay.textContent = '0';
       qtyBtns[0].disabled = true;
 
-      console.log('Cart:', cart);
+      updateCartDisplay();
     });
   }
