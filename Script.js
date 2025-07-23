@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       
         // Create and insert profile image
+        console.log(user.photoURL)
         const profilePic = document.createElement("img");
         profilePic.src = user.photoURL;
         profilePic.alt = user.displayName;
