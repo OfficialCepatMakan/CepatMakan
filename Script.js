@@ -2,19 +2,48 @@
   const auth = firebase.auth();
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  document.getElementById("googleSignInBtn").addEventListener("click", function() {
-    console.log("Sign in button clicked"); // Add this
+  document.addEventListener("DOMContentLoaded", () => {
+    const signInBtn = document.getElementById("googleSignInBtn");
+    const infoItem = signInBtn.parentElement; // The <div class="info-item">
     
-    auth.signInWithPopup(provider)
-      .then((result) => {
-        const user = result.user;
-        alert(`Signed in as ${user.displayName}`);
-        console.log("User Info:", user);
-      })
-      .catch((error) => {
-        console.error("Error during sign-in:", error.message);
-      });
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Remove the sign-in button
+        signInBtn.remove();
+      
+        // Create a profile pic element
+        const profilePic = document.createElement("img");
+        profilePic.src = user.photoURL;
+        profilePic.alt = user.displayName;
+        profilePic.title = user.displayName;
+        profilePic.style.width = "32px";
+        profilePic.style.height = "32px";
+        profilePic.style.borderRadius = "50%";
+        profilePic.style.cursor = "pointer";
+        profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+        profilePic.classList.add("googleProfile");
+      
+        // Append it where the button used to be
+        infoItem.appendChild(profilePic);
+      } else {
+        // Still show the button if not logged in
+        signInBtn.style.display = "flex";
+      }
+    });
+  
+    // Google Sign-In
+    signInBtn.addEventListener("click", function () {
+      auth.signInWithPopup(provider)
+        .then((result) => {
+          console.log("Signed in as", result.user.displayName);
+          // Firebase handles UI change via onAuthStateChanged
+        })
+        .catch((error) => {
+          console.error("Error during sign-in:", error.message);
+        });
+    });
   });
+  
 
   
   const mainCourseRef = db.ref('menu/main_course');
