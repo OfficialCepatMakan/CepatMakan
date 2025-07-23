@@ -4,14 +4,11 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const signInBtn = document.getElementById("googleSignInBtn");
-    const infoItem = signInBtn.parentElement; // The <div class="info-item">
-    
+
+    // Firebase Auth state listener
     auth.onAuthStateChanged((user) => {
       if (user) {
-        // Remove the sign-in button
-        signInBtn.remove();
-      
-        // Create a profile pic element
+        // Replace the sign-in button with profile image
         const profilePic = document.createElement("img");
         profilePic.src = user.photoURL;
         profilePic.alt = user.displayName;
@@ -22,28 +19,24 @@
         profilePic.style.cursor = "pointer";
         profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
         profilePic.classList.add("googleProfile");
-      
-        // Append it where the button used to be
-        infoItem.appendChild(profilePic);
-      } else {
-        // Still show the button if not logged in
-        signInBtn.style.display = "flex";
+
+        // Remove the button from DOM
+        signInBtn.replaceWith(profilePic);
       }
     });
-  
-    // Google Sign-In
+
+    // Sign-in logic
     signInBtn.addEventListener("click", function () {
       auth.signInWithPopup(provider)
         .then((result) => {
           console.log("Signed in as", result.user.displayName);
-          // Firebase handles UI change via onAuthStateChanged
+          // onAuthStateChanged will handle the UI update
         })
         .catch((error) => {
           console.error("Error during sign-in:", error.message);
         });
     });
   });
-  
 
   
   const mainCourseRef = db.ref('menu/main_course');
