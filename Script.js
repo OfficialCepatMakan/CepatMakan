@@ -2,42 +2,47 @@
   const auth = firebase.auth();
   const provider = new firebase.auth.GoogleAuthProvider();
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const signInBtn = document.getElementById("googleSignInBtn");
-
-    // Firebase Auth state listener
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // Replace the sign-in button with profile image
-        const profilePic = document.createElement("img");
-        profilePic.src = user.photoURL;
-        profilePic.alt = user.displayName;
-        profilePic.title = user.displayName;
-        profilePic.style.width = "32px";
-        profilePic.style.height = "32px";
-        profilePic.style.borderRadius = "50%";
-        profilePic.style.cursor = "pointer";
-        profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-        profilePic.classList.add("googleProfile");
-
-        // Remove the button from DOM
+  const signInBtn = document.getElementById("googleSignInBtn");
+  
+  // Firebase Auth state listener
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      console.log("User signed in:", user.displayName);
+      const profilePic = document.createElement("img");
+      profilePic.src = user.photoURL;
+      profilePic.alt = user.displayName;
+      profilePic.title = user.displayName;
+      profilePic.style.width = "32px";
+      profilePic.style.height = "32px";
+      profilePic.style.borderRadius = "50%";
+      profilePic.style.cursor = "pointer";
+      profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+      profilePic.classList.add("googleProfile");
+    
+      // Replace the button with profile
+      if (signInBtn && signInBtn.parentNode) {
         signInBtn.replaceWith(profilePic);
       }
-    });
-
-    // Sign-in logic
-    signInBtn.addEventListener("click", function () {
-      auth.signInWithPopup(provider)
-        .then((result) => {
-          console.log("Signed in as", result.user.displayName);
-          // onAuthStateChanged will handle the UI update
-        })
-        .catch((error) => {
-          console.error("Error during sign-in:", error.message);
-        });
-    });
+    }
   });
-
+  
+  // Sign-in logic
+  document.addEventListener("DOMContentLoaded", () => {
+    if (signInBtn) {
+      signInBtn.addEventListener("click", function () {
+        auth.signInWithPopup(provider)
+          .then((result) => {
+            console.log("Signed in as", result.user.displayName);
+            // UI update handled by onAuthStateChanged
+          })
+          .catch((error) => {
+            console.error("Error during sign-in:", error.message);
+          });
+      });
+    }
+  });
+  
+  
   
   const mainCourseRef = db.ref('menu/main_course');
     let cart = []
