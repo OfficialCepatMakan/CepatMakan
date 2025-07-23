@@ -3,29 +3,27 @@
   const provider = new firebase.auth.GoogleAuthProvider();
 
   const signInBtn = document.getElementById("googleSignInBtn");
-  
+
   // Firebase Auth state listener
   auth.onAuthStateChanged((user) => {
     if (user) {
       console.log("User signed in:", user.displayName);
       const profilePic = document.createElement("img");
-      profilePic.src = user.photoURL;
-      profilePic.alt = user.displayName;
-      profilePic.title = user.displayName;
-      profilePic.style.width = "32px";
-      profilePic.style.height = "32px";
-      profilePic.style.borderRadius = "50%";
+      profilePic.style.width = "32px"; // You can adjust this to any size
+      profilePic.style.height = "32px"; // Ensure the width and height are the same to maintain a square shape
+      profilePic.style.borderRadius = "50%"; // This will make the image circular
+      profilePic.style.objectFit = "cover"; // Ensures the image doesn't stretch, and it fills the circle area
+      profilePic.style.objectPosition = "center"; // Ensures the image is centered within the circle
       profilePic.style.cursor = "pointer";
       profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
       profilePic.classList.add("googleProfile");
-    
       // Replace the button with profile
       if (signInBtn && signInBtn.parentNode) {
         signInBtn.replaceWith(profilePic);
       }
     }
   });
-  
+
   // Sign-in logic
   document.addEventListener("DOMContentLoaded", () => {
     if (signInBtn) {
@@ -41,8 +39,8 @@
       });
     }
   });
-  
-  
+
+
   
   const mainCourseRef = db.ref('menu/main_course');
     let cart = []
