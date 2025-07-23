@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CepatMakan - Food Ordering System</title>
+    <link rel="icon" href="logo.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
 </head>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-auth-compat.js"></script>
 <script src="firebase-config.js"></script>
-<script src="Script.js"></script>
 <body>
     <!-- Header -->
     <header class="header">
@@ -40,6 +41,10 @@
                     </svg>
 
                     <span>NAMS Building</span>
+                    <button class="googleSignInBtn" id="googleSignInBtn">
+                      <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
+                      Sign in with Google
+                    </button>
                 </div>
             </div>
         </div>
@@ -139,10 +144,11 @@
                         <span>Total:</span>
                         <span class="total-price">Rp 0</span>
                     </div>
-                    <button class="order-btn" disabled>Place Order</button>
+                    <button class="order-btn" id="order-btn" disabled>Place Order</button>
                 </div>
             </div>
         </aside>
     </div>
 </body>
+<script src="Script.js"></script>
 </html>
