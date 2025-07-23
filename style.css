@@ -4,6 +4,17 @@
         padding: 0;
         box-sizing: border-box;
     }
+    .googleProfile {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;       /* THIS makes the image keep aspect ratio and crop nicely */
+      display: block;          /* remove inline quirks */
+      margin: 0 auto;          /* center it horizontally */
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+
     .item-image img {
       max-width: 100%;
       max-height: 100%;
