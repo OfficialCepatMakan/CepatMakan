@@ -1,59 +1,53 @@
-const auth = firebase.auth();
-const provider = new firebase.auth.GoogleAuthProvider();
+  document.addEventListener("DOMContentLoaded", () => {
+    const auth = firebase.auth();
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const authContainer = document.getElementById("authContainer");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const signInBtn = document.getElementById("googleSignInBtn");
-  
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("User signed in:", user.displayName);
-      
-        // Remove the sign-in button if it exists
-        if (signInBtn && signInBtn.parentNode) {
-          signInBtn.remove();
-        }
-      
-        // Create and insert profile image
-        console.log(user.photoURL)
+
+        // Clear container first
+        authContainer.innerHTML = "";
+
+        // Create profile pic element
         const profilePic = document.createElement("img");
-        profilePic.src = user.photoURL;
+        profilePic.src = user.photoURL || "https://via.placeholder.com/32";
         profilePic.alt = user.displayName;
         profilePic.title = user.displayName;
         profilePic.style.width = "32px";
         profilePic.style.height = "32px";
         profilePic.style.borderRadius = "50%";
+        profilePic.style.objectFit = "cover";
         profilePic.style.cursor = "pointer";
         profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
         profilePic.classList.add("googleProfile");
-      
-        // Insert where the sign-in button used to be
-        const authContainer = document.getElementById("authContainer"); // <-- wrap the button in a div with this id
-        if (authContainer) {
-          authContainer.appendChild(profilePic);
-        }
+
+        authContainer.appendChild(profilePic);
+
       } else {
-        console.log("No user signed in.");
+        // User not signed in — restore the button
+        authContainer.innerHTML = `
+          <button class="googleSignInBtn" id="googleSignInBtn">
+            <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" />
+            Sign in with Google
+          </button>
+        `;
+
+        // Re-attach event listener on the new button
+        const signInBtn = document.getElementById("googleSignInBtn");
+        signInBtn.addEventListener("click", () => {
+          auth.signInWithPopup(provider)
+            .then((result) => {
+              console.log("Signed in as", result.user.displayName);
+            })
+            .catch((error) => {
+              console.error("Error during sign-in:", error.message);
+            });
+        });
       }
     });
-  
-    // Sign in on click
-    if (signInBtn) {
-      signInBtn.addEventListener("click", function () {
-        auth
-          .signInWithPopup(provider)
-          .then((result) => {
-            console.log("Signed in as", result.user.displayName);
-            // DOM update will happen via onAuthStateChanged
-          })
-          .catch((error) => {
-            console.error("Error during sign-in:", error.message);
-          });
-      });
-    }
-  });
-
-  
-  
+  });  
   
   const mainCourseRef = db.ref('menu/main_course');
     let cart = []
