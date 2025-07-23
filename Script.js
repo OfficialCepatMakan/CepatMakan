@@ -16,6 +16,7 @@
       profilePic.style.height = "32px";
       profilePic.style.borderRadius = "50%";
       profilePic.style.cursor = "pointer";
+      profilePic.style.paddingLeft = "10px"
       profilePic.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
       profilePic.classList.add("googleProfile");
     
