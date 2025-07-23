@@ -1,6 +1,7 @@
-  document.addEventListener("DOMContentLoaded", () => {
-    const auth = firebase.auth();
-    const provider = new firebase.auth.GoogleAuthProvider();
+const auth = firebase.auth();
+const provider = new firebase.auth.GoogleAuthProvider();
+
+document.addEventListener("DOMContentLoaded", () => {
     const signInBtn = document.getElementById("googleSignInBtn");
   
     auth.onAuthStateChanged((user) => {
