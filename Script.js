@@ -1,4 +1,22 @@
   // Reference to menu items in Realtime DB
+  const auth = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  document.getElementById("googleSignInBtn").addEventListener("click", function() {
+    console.log("Sign in button clicked"); // Add this
+    
+    auth.signInWithPopup(provider)
+      .then((result) => {
+        const user = result.user;
+        alert(`Signed in as ${user.displayName}`);
+        console.log("User Info:", user);
+      })
+      .catch((error) => {
+        console.error("Error during sign-in:", error.message);
+      });
+  });
+
+  
   const mainCourseRef = db.ref('menu/main_course');
     let cart = []
   
@@ -55,6 +73,7 @@
     const cartCount = document.querySelector('.cart-count');
     const cartItemsContainer = document.querySelector('.cart-items');
     const emptyCartMessage = document.querySelector('.empty-cart');
+    const totalPriceElement = document.querySelector('.total-section .total-price');
 
     cartItemsContainer.innerHTML = '';
 
@@ -62,16 +81,22 @@
       cartItemsContainer.style.display = 'none';
       emptyCartMessage.style.display = 'block';
       cartCount.textContent = '0';
+      document.getElementById("order-btn").disabled = true;
+      if (totalPriceElement) totalPriceElement.textContent = 'Rp 0';
       return;
+    } else {
+      document.getElementById("order-btn").disabled = false;
     }
 
     emptyCartMessage.style.display = 'none';
     cartItemsContainer.style.display = 'block';
 
     let totalItems = 0;
+    let totalPrice = 0;
 
     cart.forEach((item) => {
       totalItems += item.quantity;
+      totalPrice += item.price * item.quantity;
 
       const cartItem = document.createElement('div');
       cartItem.className = 'cart-item';
@@ -86,9 +111,9 @@
           <span>${item.quantity}</span>
           <button class="qty-btn plus">+</button>
         </div>
+        <span>Rp ${(item.price * item.quantity).toLocaleString('id-ID')}</span>
       `;
 
-      // Safely get the buttons
       const minusBtn = cartItem.querySelector('.qty-btn.minus');
       const plusBtn = cartItem.querySelector('.qty-btn.plus');
 
@@ -109,7 +134,13 @@
     });
 
     cartCount.textContent = totalItems;
+
+    // ✅ Update total price in .total-section
+    if (totalPriceElement) {
+      totalPriceElement.textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+    }
   }
+
 
 
   function setupQuantityLogic(menuItem, key, item) {
