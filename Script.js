@@ -189,14 +189,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (
       totalItems > 0 &&
-      grade.trim() !== '' &&
-      className.trim() !== '' &&
-      paymentMethod.trim() !== '' &&
-      name.trim() !== ''
+      grade.trim() == '' &&
+      className.trim() == '' &&
+      paymentMethod.trim() == '' &&
+      name.trim() == ''
     ) {
-      continue
-    } else {
       alert("please fill all feilds")
+      return;
     }
   
     const ordersRef = db.ref('Orders');
