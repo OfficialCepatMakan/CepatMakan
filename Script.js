@@ -174,6 +174,33 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function SendOrder(cart) {
+    const grade = document.getElementById('grade').value;
+    const className = document.getElementById('class').value;
+    const paymentMethod = document.getElementById('paymentmethod').value;
+    const name = document.getElementById('name').value;
+  
+    const ordersRef = db.ref('Orders');
+  
+    const orderData = {
+      name: name,
+      grade: grade,
+      class: className,
+      paymentMethod: paymentMethod,
+      items: cart,
+      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      timestamp: new Date().toISOString()
+    };
+  
+    ordersRef.push(orderData)
+      .then(() => {
+        console.log('Order saved successfully.');
+      })
+      .catch((error) => {
+        console.error('Error saving order:', error);
+      });
+  }
+
 
 
   function setupQuantityLogic(menuItem, key, item) {
