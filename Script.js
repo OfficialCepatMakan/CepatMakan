@@ -3,7 +3,14 @@ const provider = new firebase.auth.GoogleAuthProvider();
 
 document.addEventListener("DOMContentLoaded", () => {
     const authContainer = document.getElementById("authContainer");
-
+    document.getElementById('order-btn').addEventListener('click', function () {
+      if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+      }
+  
+      SendOrder(cart);
+        });
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("User signed in:", user.displayName);
