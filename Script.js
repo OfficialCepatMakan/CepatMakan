@@ -182,10 +182,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function SendOrder(cart) {
-    const grade = document.getElementById('grade').value;
-    const className = document.getElementById('class').value;
-    const paymentMethod = document.getElementById('paymentmethod').value;
-    const name = document.getElementById('name').value;
+    const grade = document.getElementById('grade').value || 'Unknown';
+    const className = document.getElementById('class').value || 'Unknown';
+    const paymentMethod = document.getElementById('paymentmethod').value || 'Unknown';
+    const name = document.getElementById('name').value || 'Anonymous';
   
     const ordersRef = db.ref('Orders');
   
