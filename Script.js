@@ -114,10 +114,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartItemsContainer = document.querySelector('.cart-items');
     const emptyCartMessage = document.querySelector('.empty-cart');
     const totalPriceElement = document.querySelector('.total-section .total-price');
-    const grade = document.getElementById('grade').value || '';
-    const className = document.getElementById('class').value || '';
-    const paymentMethod = document.getElementById('paymentmethod').value || '';
-    const name = document.getElementById('name').value || '';
 
     cartItemsContainer.innerHTML = '';
 
@@ -130,18 +126,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     } else {
       document.getElementById("order-btn").disabled = false;
-    }
-
-    if (
-      totalItems > 0 &&
-      grade.trim() !== '' &&
-      className.trim() !== '' &&
-      paymentMethod.trim() !== '' &&
-      name.trim() !== ''
-    ) {
-      orderBtn.disabled = false;
-    } else {
-      orderBtn.disabled = true;
     }
 
     emptyCartMessage.style.display = 'none';
@@ -202,6 +186,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const className = document.getElementById('class').value || 'Unknown';
     const paymentMethod = document.getElementById('paymentmethod').value || 'Unknown';
     const name = document.getElementById('name').value || 'Anonymous';
+
+    if (
+      totalItems > 0 &&
+      grade.trim() !== '' &&
+      className.trim() !== '' &&
+      paymentMethod.trim() !== '' &&
+      name.trim() !== ''
+    ) {
+      continue
+    } else {
+      alert("please fill all feilds")
+    }
   
     const ordersRef = db.ref('Orders');
   
