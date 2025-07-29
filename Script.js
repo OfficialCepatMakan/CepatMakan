@@ -188,7 +188,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const name = document.getElementById('name').value || 'Anonymous';
 
     if (
-      totalItems > 0 &&
       grade.trim() == '' &&
       className.trim() == '' &&
       paymentMethod.trim() == '' &&
