@@ -186,14 +186,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const className = document.getElementById('class').value || '';
     const paymentMethod = document.getElementById('paymentmethod').value || '';
     const name = document.getElementById('name').value || '';
-
+  
+    // Validation (use OR `||` instead of AND `&&` to catch any empty field)
     if (
-      grade.trim() == '' &&
-      className.trim() == '' &&
-      paymentMethod.trim() == '' &&
-      name.trim() == ''
+      grade.trim() === '' ||
+      className.trim() === '' ||
+      paymentMethod.trim() === '' ||
+      name.trim() === ''
     ) {
-      alert("please fill all feilds")
+      alert("Please fill all fields");
       return;
     }
   
@@ -212,11 +213,20 @@ document.addEventListener("DOMContentLoaded", () => {
     ordersRef.push(orderData)
       .then(() => {
         console.log('Order saved successfully.');
+        alert("Order submitted!");
+      
+        // 🔁 Clear the cart array (in-place)
+        cart.length = 0;
+      
+        // 🔄 Update UI
+        updateCartDisplay();
       })
       .catch((error) => {
         console.error('Error saving order:', error);
+        alert('Something went wrong, order not sent!');
       });
   }
+
 
 
 
