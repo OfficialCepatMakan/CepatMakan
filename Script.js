@@ -1,5 +1,44 @@
 const auth = firebase.auth();
 const provider = new firebase.auth.GoogleAuthProvider();
+const menuBtn = document.getElementById("menu-button");
+const sidePanel = document.getElementById("side-panel");
+const menuSection = document.getElementById("menu-section");
+const cartSection = document.getElementById("cart-section");
+const menuBtn2 = document.getElementById("btn-menu");
+const cartBtn = document.getElementById("btn-cart");
+menuBtn2.addEventListener("click", () => {
+  menuSection.style.display = "grid";
+  cartSection.style.display = "none";
+});
+cartBtn.addEventListener("click", () => {
+  menuSection.style.display = "none";
+  cartSection.style.display = "block";
+});
+
+const sections = {
+  home: document.getElementById("home-section"),
+  cart: document.getElementById("cart-section"),
+  orders: document.getElementById("orders-section")
+};
+
+menuBtn.addEventListener("click", () => {
+  sidePanel.classList.toggle("show");
+});
+
+function hideAllSections() {
+  for (let key in sections) {
+    sections[key].style.display = "none";
+  }
+}
+
+sidePanel.querySelectorAll(".nav-buttons button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const section = btn.getAttribute("data-section");
+    hideAllSections();
+    sections[section].style.display = "block";
+    sidePanel.classList.remove("show");
+  });
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     const authContainer = document.getElementById("authContainer");
