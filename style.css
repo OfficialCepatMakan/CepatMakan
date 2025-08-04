@@ -4,6 +4,48 @@
         padding: 0;
         box-sizing: border-box;
     }
+    #orders-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .order-item {
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      background-color: #fff;
+    }
+    
+    .order-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .order-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+
+    .order-card h4 {
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .order-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #555;
+    }
     .side-panel {
       position: fixed;
       top: 64px;
