@@ -296,7 +296,6 @@ document.addEventListener("DOMContentLoaded", () => {
       paymentMethod: paymentMethod,
       items: cart,
       total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      email: user.email,
       timestamp: new Date().toISOString()
       
     };
@@ -364,5 +363,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
