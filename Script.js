@@ -136,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
           auth.signInWithPopup(provider)
             .then((result) => {
               console.log("Signed in as", result.user.displayName);
+              const email = user.email;
             })
             .catch((error) => {
               console.error("Error during sign-in:", error.message);
@@ -295,7 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
       paymentMethod: paymentMethod,
       items: cart,
       total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      email: email,
       timestamp: new Date().toISOString()
+      
     };
   
     ordersRef.push(orderData)
@@ -361,3 +364,4 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
