@@ -5,15 +5,47 @@ const sidePanel = document.getElementById("side-panel");
 const menuSection = document.getElementById("menu-section");
 const cartSection = document.getElementById("cart-section");
 const menuBtn2 = document.getElementById("btn-menu");
+const orderBtn = document.getElementById("btn-order")
 const cartBtn = document.getElementById("btn-cart");
-menuBtn2.addEventListener("click", () => {
-  menuSection.style.display = "grid";
-  cartSection.style.display = "none";
-});
-cartBtn.addEventListener("click", () => {
-  menuSection.style.display = "none";
-  cartSection.style.display = "block";
-});
+const orderSection = document.getElementById("orders-section")
+
+function fetchAndRenderOrders() {
+  const ordersRef = db.ref('Orders');
+  const ordersList = document.getElementById('orders-list');
+  ordersList.innerHTML = ''; // clear existing orders
+
+  ordersRef.once('value', (snapshot) => {
+    if (!snapshot.exists()) {
+      ordersList.innerHTML = '<p>No orders found.</p>';
+      return;
+    }
+
+    snapshot.forEach((childSnapshot) => {
+      const order = childSnapshot.val();
+
+      const orderDiv = document.createElement('div');
+      orderDiv.className = 'order-item'; // you can style this in CSS
+
+      let itemsHTML = '';
+      order.items.forEach((item) => {
+        itemsHTML += `
+          <p>
+            ${item.name} x${item.quantity} — Rp${(item.price * item.quantity).toLocaleString()}
+          </p>`;
+      });
+
+      orderDiv.innerHTML = `
+        <h4>${order.name} (${order.grade}-${order.class})</h4>
+        <p><strong>Payment:</strong> ${order.paymentMethod}</p>
+        <p><strong>Items:</strong>${itemsHTML}</p>
+        <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
+      `;
+
+      ordersList.appendChild(orderDiv);
+    });
+  });
+}
+
 
 const sections = {
   home: document.getElementById("home-section"),
@@ -50,6 +82,23 @@ document.addEventListener("DOMContentLoaded", () => {
   
       SendOrder(cart);
         });
+
+    menuBtn2.addEventListener("click", () => {
+        menuSection.style.display = "grid";
+        cartSection.style.display = "none";
+        orderSection.style.display = "none";
+      });
+      cartBtn.addEventListener("click", () => {
+        menuSection.style.display = "none";
+        cartSection.style.display = "block";
+        orderSection.style.display = "none";
+      });
+      orderBtn.addEventListener("click", () => {
+        orderSection.style.display = "block";
+        fetchAndRenderOrders();
+        menuSection.style.display = "none";
+        cartSection.style.display = "none";
+      });
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("User signed in:", user.displayName);
