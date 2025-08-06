@@ -276,7 +276,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const className = document.getElementById('class').value || '';
     const paymentMethod = document.getElementById('paymentmethod').value || '';
     const name = document.getElementById('name').value || '';
-    console.log(user.email)
   
     // Validation (use OR `||` instead of AND `&&` to catch any empty field)
     if (
@@ -290,6 +289,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     const ordersRef = db.ref('Orders');
+    console.log("user.email = ", user.email);
+    console.log("typeof user.email = ", typeof user.email);
   
     const orderData = {
       name: name,
@@ -366,6 +367,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
