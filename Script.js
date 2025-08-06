@@ -8,6 +8,7 @@ const menuBtn2 = document.getElementById("btn-menu");
 const orderBtn = document.getElementById("btn-order")
 const cartBtn = document.getElementById("btn-cart");
 const orderSection = document.getElementById("orders-section")
+let user = 
 
 function fetchAndRenderOrders() {
   const ordersRef = db.ref('Orders');
@@ -136,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
           auth.signInWithPopup(provider)
             .then((result) => {
               console.log("Signed in as", result.user.displayName);
-              const email = user.email;
+              user = result.user.displayName
             })
             .catch((error) => {
               console.error("Error during sign-in:", error.message);
@@ -296,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
       paymentMethod: paymentMethod,
       items: cart,
       total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      mail: user.displayName,
+      mail: user,
       timestamp: new Date().toISOString()
       
     };
@@ -364,6 +365,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
