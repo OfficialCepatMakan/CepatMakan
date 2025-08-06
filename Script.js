@@ -280,7 +280,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function SendOrder(cart) {
+  function SendOrder(cart, mail) {
     const grade = document.getElementById('grade').value || '';
     const className = document.getElementById('class').value || '';
     const paymentMethod = document.getElementById('paymentmethod').value || '';
@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", () => {
       paymentMethod: paymentMethod,
       items: cart,
       total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      mail: user.email,
+      mail: mail,
       timestamp: new Date().toISOString()
       
     };
@@ -374,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
