@@ -83,7 +83,17 @@ document.addEventListener("DOMContentLoaded", () => {
       console.log("user.email = ", user.email);
       console.log("typeof user.email = ", typeof user.email);
   
-      SendOrder(cart);
+      firebase.auth().onAuthStateChanged(function(u) {
+        if (u) {
+          // ✅ The user is logged in
+          console.log("Auth user:", u);
+          SendOrder(cart, u.email); // <- this ensures it’s not undefined
+        } else {
+          // ❌ Not logged in
+          alert("You must be logged in to order.");
+        }
+      });
+
         });
 
     menuBtn2.addEventListener("click", () => {
@@ -369,6 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
