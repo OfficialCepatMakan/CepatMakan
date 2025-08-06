@@ -75,26 +75,23 @@ sidePanel.querySelectorAll(".nav-buttons button").forEach(btn => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const authContainer = document.getElementById("authContainer");
+
     document.getElementById('order-btn').addEventListener('click', function () {
       if (cart.length === 0) {
         alert("Your cart is empty!");
         return;
       }
-      console.log("user.email = ", user.email);
-      console.log("typeof user.email = ", typeof user.email);
-  
-      firebase.auth().onAuthStateChanged(function(u) {
-        if (u) {
-          // ✅ The user is logged in
-          console.log("Auth user:", u);
-          SendOrder(cart, u.email); // <- this ensures it’s not undefined
-        } else {
-          // ❌ Not logged in
-          alert("You must be logged in to order.");
-        }
-      });
 
-        });
+      const user = firebase.auth().currentUser;
+
+      if (user) {
+        console.log("Signed in user:", user);
+        console.log("user.email = ", user.email);
+        SendOrder(cart, user.email); // ✅ email is now defined
+      } else {
+        alert("You must be logged in to order.");
+      }
+    });
 
     menuBtn2.addEventListener("click", () => {
         menuSection.style.display = "grid";
@@ -301,8 +298,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     const ordersRef = db.ref('Orders');
-    console.log("user.email = ", user.email);
-    console.log("typeof user.email = ", typeof user.email);
   
     const orderData = {
       name: name,
@@ -379,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
