@@ -24,29 +24,31 @@ function fetchAndRenderOrders(mail) {
     snapshot.forEach((childSnapshot) => {
       const order = childSnapshot.val();
 
-      const orderDiv = document.createElement('div');
-      orderDiv.className = 'order-item'; // you can style this in CSS
+      if (order.mail === mail) {
+        const orderDiv = document.createElement('div');
+        orderDiv.className = 'order-item';
 
-      let itemsHTML = '';
-      order.items.forEach((item) => {
-        itemsHTML += `
-          <p>
-            ${item.name} x${item.quantity} — Rp${(item.price * item.quantity).toLocaleString()}
-          </p>`;
-      });
+        let itemsHTML = '';
+        order.items.forEach((item) => {
+          itemsHTML += `
+            <p>
+              ${item.name} x${item.quantity} — Rp${(item.price * item.quantity).toLocaleString()}
+            </p>`;
+        });
 
-      orderDiv.innerHTML = `
-        <h4>${order.name} (${order.grade}-${order.class})</h4>
-        <p><strong>Payment:</strong> ${order.paymentMethod}</p>
-        <p><strong>Items:</strong>${itemsHTML}</p>
-        <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
-      `;
-      if order.mail === mail {
+        orderDiv.innerHTML = `
+          <h4>${order.name} (${order.grade}-${order.class})</h4>
+          <p><strong>Payment:</strong> ${order.paymentMethod}</p>
+          <p><strong>Items:</strong>${itemsHTML}</p>
+          <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
+        `;
+
         ordersList.appendChild(orderDiv);
       }
     });
   });
 }
+
 
 
 const sections = {
@@ -375,6 +377,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
