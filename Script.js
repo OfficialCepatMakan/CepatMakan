@@ -10,7 +10,7 @@ const cartBtn = document.getElementById("btn-cart");
 const orderSection = document.getElementById("orders-section")
 let user = 
 
-function fetchAndRenderOrders() {
+function fetchAndRenderOrders(mail) {
   const ordersRef = db.ref('Orders');
   const ordersList = document.getElementById('orders-list');
   ordersList.innerHTML = ''; // clear existing orders
@@ -41,8 +41,9 @@ function fetchAndRenderOrders() {
         <p><strong>Items:</strong>${itemsHTML}</p>
         <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
       `;
-
-      ordersList.appendChild(orderDiv);
+      if order.mail === mail {
+        ordersList.appendChild(orderDiv);
+      }
     });
   });
 }
@@ -105,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       orderBtn.addEventListener("click", () => {
         orderSection.style.display = "block";
-        fetchAndRenderOrders();
+        fetchAndRenderOrders(user.email);
         menuSection.style.display = "none";
         cartSection.style.display = "none";
       });
@@ -374,6 +375,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
