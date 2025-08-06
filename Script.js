@@ -80,6 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Your cart is empty!");
         return;
       }
+      console.log("user.email = ", user.email);
+      console.log("typeof user.email = ", typeof user.email);
   
       SendOrder(cart);
         });
@@ -367,6 +369,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
