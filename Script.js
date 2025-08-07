@@ -9,6 +9,7 @@ const orderBtn = document.getElementById("btn-order")
 const cartBtn = document.getElementById("btn-cart");
 const orderSection = document.getElementById("orders-section")
 
+
 const sections = {
   home: document.getElementById("home-section"),
   cart: document.getElementById("cart-section"),
@@ -36,8 +37,20 @@ sidePanel.querySelectorAll(".nav-buttons button").forEach(btn => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const authContainer = document.getElementById("authContainer");
+    let adminEmails = [];
 
-    function fetchAndRenderOrders(mail) {
+    fetch('admins.json')
+      .then(response => response.json())
+      .then(data => {
+        adminEmails = data.adminEmails;
+        console.log("Loaded admin emails:", adminEmails);
+  
+      })
+      .catch(error => {
+        console.error("Failed to load admins.json:", error);
+      });
+
+    function fetchAndRenderOrders(mail, admins) {
       const ordersRef = db.ref('Orders');
       const ordersList = document.getElementById('orders-list');
       ordersList.innerHTML = ''; // clear existing orders
@@ -51,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         snapshot.forEach((childSnapshot) => {
           const order = childSnapshot.val();
         
-          if (order.mail === mail) {
+          if (order.mail === mail || admins.includes(order.mail)) {
             const orderDiv = document.createElement('div');
             orderDiv.className = 'order-item';
           
@@ -108,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const user = firebase.auth().currentUser;
         if (user && user.email) {
-          fetchAndRenderOrders(user.email);
+          fetchAndRenderOrders(user.email, adminEmails);
         } else {
           console.error("No user signed in");
         }
@@ -382,3 +395,4 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
