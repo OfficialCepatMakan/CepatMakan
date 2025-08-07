@@ -108,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       orderBtn.addEventListener("click", () => {
         orderSection.style.display = "block";
+        console.log("typeof fetchAndRenderOrders:", typeof fetchAndRenderOrders);
         fetchAndRenderOrders(user.email);
         menuSection.style.display = "none";
         cartSection.style.display = "none";
@@ -377,6 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
