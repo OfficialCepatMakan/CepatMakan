@@ -74,7 +74,7 @@
     .side-panel {
       position: fixed;
       top: 64px;
-      left: -160px;
+      left: -120px;
       width: 160px;
       height: calc(100vh - 64px);
       background: white;
@@ -563,6 +563,7 @@
             grid-template-columns: 1fr;
         }
     }
+
 
 
 
