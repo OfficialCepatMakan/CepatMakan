@@ -65,10 +65,8 @@ document.addEventListener("DOMContentLoaded", () => {
       
         snapshot.forEach((childSnapshot) => {
           const order = childSnapshot.val();
-          console.log(order.mail === mail || admins.includes(order.mail))
-          console.log(admins.includes(order.mail))
         
-          if (order.mail === mail || admins.includes(order.mail)) {
+          if (order.mail === mail || admins.includes(mail)) {
             const orderDiv = document.createElement('div');
             orderDiv.className = 'order-item';
           
@@ -399,6 +397,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
