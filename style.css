@@ -10,6 +10,27 @@
       gap: 1rem;
       padding: 1rem;
     }
+    .remove-order {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      border-radius: 4px;
+      transition: background-color 0.2s ease;
+      color: #e00; /* red-ish for delete */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .remove-order:hover {
+      background-color: rgba(224, 0, 0, 0.1);
+    }
+
+    .remove-order:active {
+      background-color: rgba(224, 0, 0, 0.3);
+    }
+
 
     .order-item {
       border: 1px solid #ddd;
@@ -539,3 +560,4 @@
             grid-template-columns: 1fr;
         }
     }
+
