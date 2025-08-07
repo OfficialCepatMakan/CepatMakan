@@ -70,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
           if (order.mail === mail || admins.includes(mail)) {
             const orderDiv = document.createElement('div');
             orderDiv.className = 'order-item';
-            console.log(
           
             let itemsHTML = '';
             order.items.forEach((item) => {
@@ -401,6 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
