@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const authContainer = document.getElementById("authContainer");
     let adminEmails = [];
 
-    fetch('admins.json')
+    fetch('Admins.json')
       .then(response => response.json())
       .then(data => {
         adminEmails = data.adminEmails;
@@ -395,4 +395,5 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
