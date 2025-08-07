@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function fetchAndRenderOrders(mail, admins) {
       console.log(mail)
+      console.log(admins)
       const ordersRef = db.ref('Orders');
       const ordersList = document.getElementById('orders-list');
       ordersList.innerHTML = ''; // clear existing orders
@@ -398,6 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
