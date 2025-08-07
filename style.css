@@ -8,6 +8,7 @@
       position: relative; /* for absolute positioning fallback */
       display: flex;
       flex-direction: column;
+      background: #fff;
       justify-content: space-between; /* push stuff apart top-to-bottom */
       padding: 12px;
       border: 1px solid #ccc;
@@ -563,5 +564,6 @@
             grid-template-columns: 1fr;
         }
     }
+
 
 
