@@ -18,6 +18,7 @@ const sections = {
 
 menuBtn.addEventListener("click", () => {
   sidePanel.classList.toggle("show");
+  menuBtn.classList.toggle("show");
 });
 
 function hideAllSections() {
@@ -400,13 +401,3 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
-
-
-
-
-
-
-
-
-
-
