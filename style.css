@@ -160,7 +160,7 @@
     }
 
     .menu-btn {
-      position: fixed; /* or sticky */
+      position: sticky; /* or sticky */
       top: 10px;
       right: 10px; /* visible inside viewport */
       width: 40px;
@@ -563,5 +563,6 @@
             grid-template-columns: 1fr;
         }
     }
+
 
 
