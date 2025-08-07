@@ -165,8 +165,6 @@
       width: 40px;
       height: 40px;
       font-size: 24px;
-      background: white;
-      border: 1px solid #ccc;
       border-left: none;
       border-radius: 0 5px 5px 0;
       cursor: pointer;
@@ -564,6 +562,7 @@
             grid-template-columns: 1fr;
         }
     }
+
 
 
 
