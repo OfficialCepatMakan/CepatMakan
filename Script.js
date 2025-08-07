@@ -8,48 +8,6 @@ const menuBtn2 = document.getElementById("btn-menu");
 const orderBtn = document.getElementById("btn-order")
 const cartBtn = document.getElementById("btn-cart");
 const orderSection = document.getElementById("orders-section")
-let user = 
-
-function fetchAndRenderOrders(mail) {
-  const ordersRef = db.ref('Orders');
-  const ordersList = document.getElementById('orders-list');
-  ordersList.innerHTML = ''; // clear existing orders
-
-  ordersRef.once('value', (snapshot) => {
-    if (!snapshot.exists()) {
-      ordersList.innerHTML = '<p>No orders found.</p>';
-      return;
-    }
-
-    snapshot.forEach((childSnapshot) => {
-      const order = childSnapshot.val();
-
-      if (order.mail === mail) {
-        const orderDiv = document.createElement('div');
-        orderDiv.className = 'order-item';
-
-        let itemsHTML = '';
-        order.items.forEach((item) => {
-          itemsHTML += `
-            <p>
-              ${item.name} x${item.quantity} — Rp${(item.price * item.quantity).toLocaleString()}
-            </p>`;
-        });
-
-        orderDiv.innerHTML = `
-          <h4>${order.name} (${order.grade}-${order.class})</h4>
-          <p><strong>Payment:</strong> ${order.paymentMethod}</p>
-          <p><strong>Items:</strong>${itemsHTML}</p>
-          <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
-        `;
-
-        ordersList.appendChild(orderDiv);
-      }
-    });
-  });
-}
-
-
 
 const sections = {
   home: document.getElementById("home-section"),
@@ -78,6 +36,45 @@ sidePanel.querySelectorAll(".nav-buttons button").forEach(btn => {
 
 document.addEventListener("DOMContentLoaded", () => {
     const authContainer = document.getElementById("authContainer");
+
+    function fetchAndRenderOrders(mail) {
+      const ordersRef = db.ref('Orders');
+      const ordersList = document.getElementById('orders-list');
+      ordersList.innerHTML = ''; // clear existing orders
+        
+      ordersRef.once('value', (snapshot) => {
+        if (!snapshot.exists()) {
+          ordersList.innerHTML = '<p>No orders found.</p>';
+          return;
+        }
+      
+        snapshot.forEach((childSnapshot) => {
+          const order = childSnapshot.val();
+        
+          if (order.mail === mail) {
+            const orderDiv = document.createElement('div');
+            orderDiv.className = 'order-item';
+          
+            let itemsHTML = '';
+            order.items.forEach((item) => {
+              itemsHTML += `
+                <p>
+                  ${item.name} x${item.quantity} — Rp${(item.price * item.quantity).toLocaleString()}
+                </p>`;
+            });
+          
+            orderDiv.innerHTML = `
+              <h4>${order.name} (${order.grade}-${order.class})</h4>
+              <p><strong>Payment:</strong> ${order.paymentMethod}</p>
+              <p><strong>Items:</strong>${itemsHTML}</p>
+              <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
+            `;
+          
+            ordersList.appendChild(orderDiv);
+          }
+        });
+      });
+    }
 
     document.getElementById('order-btn').addEventListener('click', function () {
       if (cart.length === 0) {
@@ -385,20 +382,3 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
