@@ -74,13 +74,18 @@
     .side-panel {
       position: fixed;
       top: 64px;
-      left: -160px; /* panel is hidden completely */
+      left: -160px; /* hidden */
       width: 160px;
-      height: 100%;
+      height: calc(100vh - 64px);
       background: white;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
       transition: left 0.3s ease;
       z-index: 1000;
+      overflow-y: auto;
+    }
+    
+    .side-panel.open {
+      left: 0;
     }
     .cart-content {
       max-height: 200vh; /* Or whatever you want */
@@ -242,12 +247,13 @@
     }
     /* Header */
     .header {
-        background: white;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        border-bottom: 1px solid #e5e7eb;
-        position: sticky;
-        top: 0;
-        z-index: 100;
+      background: white;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: 64px; /* make sure header height is explicit */
     }
     .header-content {
         display: flex;
@@ -564,8 +570,3 @@
             grid-template-columns: 1fr;
         }
     }
-
-
-
-
-
