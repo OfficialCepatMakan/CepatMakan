@@ -108,11 +108,18 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       orderBtn.addEventListener("click", () => {
         orderSection.style.display = "block";
-        console.log("typeof fetchAndRenderOrders:", typeof fetchAndRenderOrders);
-        fetchAndRenderOrders(user.email);
+
+        const user = firebase.auth().currentUser;
+        if (user && user.email) {
+          fetchAndRenderOrders(user.email);
+        } else {
+          console.error("No user signed in");
+        }
+
         menuSection.style.display = "none";
         cartSection.style.display = "none";
       });
+
     auth.onAuthStateChanged((user) => {
       if (user) {
         console.log("User signed in:", user.displayName);
@@ -378,6 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
