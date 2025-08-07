@@ -74,13 +74,13 @@
     .side-panel {
       position: fixed;
       top: 64px;
-      left: -120px;
+      left: -160px;
       width: 160px;
       height: calc(100vh - 64px);
       background: white;
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
       transition: left 0.3s ease;
-      z-index: 1000;
+      z-index: 100;
       overflow-y: auto;
     }
     .cart-content {
@@ -160,17 +160,45 @@
     }
 
     .menu-btn {
-      position: sticky; /* or sticky */
-      top: 10px;
-      right: 10px; /* visible inside viewport */
+      position: fixed;
+      top: 63px;
+      left: 0px;;
       width: 40px;
       height: 40px;
       font-size: 24px;
-      background: transparent;
+      background: white;
+      color: black;
       border-radius: 0 5px 5px 0;
       cursor: pointer;
       z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;        /* remove border */
+      box-shadow: none;    /* remove shadow */
+      transition: left 0.3s ease;
     }
+
+    .menu-btn.show {
+      position: fixed;
+      top: 63px;
+      left: 159px;;
+      width: 40px;
+      height: 40px;
+      font-size: 24px;
+      background: white;
+      color: black;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;        /* remove border */
+      box-shadow: none;    /* remove shadow */
+    }
+
+
     .nav-buttons {
       display: flex;
       flex-direction: column;
@@ -245,7 +273,7 @@
       border-bottom: 1px solid #e5e7eb;
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 10000;
       height: 64px; /* make sure header height is explicit */
     }
     .header-content {
@@ -563,7 +591,3 @@
             grid-template-columns: 1fr;
         }
     }
-
-
-
-
