@@ -4,14 +4,49 @@
         padding: 0;
         box-sizing: border-box;
     }
+    html, body {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    *, *::before, *::after {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    :root {
+      --bg-color: linear-gradient(135deg, #fef7ed 0%, #fef2f2 100%);
+      --text-color: #333;
+      --card-bg: #fff;
+      --border-color: #ccc;
+      --accent-color: #f97316;
+      --accent-hover: #ea580c;
+      --muted-text: #6b7280
+      --item-bg: #f3f4f6;
+      --danger-color: #e00;
+      --Symbols: black;
+
+    }
+    :root.dark {
+      --bg-color: #121212;
+      --text-color: #f5f5f5;
+      --card-bg: #1e1e1e;
+      --border-color: #333;
+      --accent-color: #f97316; /* can keep same or change */
+      --accent-hover: #ea580c;
+      --muted-text: #f4f4f4;
+      --danger-color: #ff6b6b;
+      --item-bg: #2a2a2a;
+      --Symbols: white;
+    }
+
+
     .order-item {
       position: relative; /* for absolute positioning fallback */
       display: flex;
       flex-direction: column;
-      background: #fff;
+      background: var(--card-bg);
       justify-content: space-between; /* push stuff apart top-to-bottom */
       padding: 12px;
-      border: 1px solid #ccc;
+      border: 1px solid var(--border-color);
       border-radius: 6px;
       margin-bottom: 12px;
       min-height: 150px; /* just to give some vertical space */
@@ -31,7 +66,7 @@
       padding: 4px;
       border-radius: 4px;
       transition: background-color 0.2s ease;
-      color: #e00; /* red */
+      color: var(--danger-color); /* red */
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -45,7 +80,7 @@
       background-color: rgba(224, 0, 0, 0.3);
     }    
     .order-card {
-      background: white;
+      background: var(--card-bg);
       border-radius: 12px;
       padding: 1rem;
       box-shadow: 0 4px 10px rgba(0,0,0,0.08);
@@ -69,7 +104,7 @@
     .order-card p {
       margin: 0;
       font-size: 0.9rem;
-      color: #555;
+      color: var(--text-color);
     }
     .side-panel {
       position: fixed;
@@ -77,7 +112,7 @@
       left: -160px;
       width: 160px;
       height: calc(100vh - 64px);
-      background: white;
+      background: var(--card-bg);
       box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
       transition: left 0.3s ease;
       z-index: 100;
@@ -95,14 +130,14 @@
         height: fit-content;
     }
     .cart-card {
-        background: white;
+        background: var(--card-bg);
         border-radius: 0.5rem;
-        border: 1px solid #e5e7eb;
+        border: 1px solid var(--border-color);
         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     }
     .cart-header {
         padding: 1.5rem;
-        border-bottom: 1px solid #e5e7eb;
+        border-bottom: 1px solid var(--item-bg);
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -112,7 +147,7 @@
         font-weight: 600;
     }
     .cart-count {
-        background: #f3f4f6;
+        background: var(--item-bg);
         color: #374151;
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
@@ -123,7 +158,7 @@
     }
     .empty-cart {
         text-align: center;
-        color: #6b7280;
+        color: var(--muted-text);
         padding: 2rem 0;
     }
     .cart-items {
@@ -134,7 +169,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 0.75rem 0;
-        border-bottom: 1px solid #f3f4f6;
+        border-bottom: 1px solid var(--item-bg);
     }
     .cart-item:last-child {
         border-bottom: none;
@@ -166,8 +201,8 @@
       width: 40px;
       height: 40px;
       font-size: 24px;
-      background: white;
-      color: black;
+      background: var(--card-bg);
+      color: var(--Symbols);
       border-radius: 0 5px 5px 0;
       cursor: pointer;
       z-index: 1001;
@@ -186,8 +221,8 @@
       width: 40px;
       height: 40px;
       font-size: 24px;
-      background: white;
-      color: black;
+      background: var(--card-bg);
+      color: var(--var(--Symbols));
       border-radius: 0 5px 5px 0;
       cursor: pointer;
       z-index: 1001;
@@ -233,8 +268,8 @@
       padding: 0 8px; /* shrink padding to fit height */
       border: none;
       border-radius: 4px;
-      background-color: white;
-      color: #444;
+      background-color: var(--item-bg);
+      color: var(--text-color);
       font-size: 12px; /* optional: make text small enough to fit */
       font-weight: 500;
       cursor: pointer;
@@ -249,7 +284,7 @@
     }
 
     .googleSignInBtn:hover {
-      background-color: #f0f0f0;
+      background-color: var(--item-bg);
       transform: scale(1.05);
     }
 
@@ -257,8 +292,8 @@
     body {
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         line-height: 1.6;
-        color: #333;
-        background: linear-gradient(135deg, #fef7ed 0%, #fef2f2 100%);
+        color: var(--text-color);
+        background: var(--bg-color);
         min-height: 100vh;
     }
     .container {
@@ -268,9 +303,9 @@
     }
     /* Header */
     .header {
-      background: white;
+      background: var(--card-bg);
       box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-      border-bottom: 1px solid #e5e7eb;
+      border-bottom: 1px solid var(--item-bg);
       position: sticky;
       top: 0;
       z-index: 10000;
@@ -289,8 +324,8 @@
         gap: 1rem;
     }
     .logo-icon {
-        background: #f97316;
-        color: white;
+        background: var(--accent-color);
+        color: var(--card-bg);
         padding: 0.5rem;
         border-radius: 0.5rem;
         width: 2.5rem;
@@ -302,7 +337,7 @@
     .logo-text h1 {
         font-size: 1.5rem;
         font-weight: bold;
-        color: #f97316;
+        color: var(--accent-color);
         padding: 0; /* remove all padding */
         margin: 0; /* remove default margin */
         /* Or set specific values */
@@ -310,7 +345,7 @@
     }
     .logo-text p {
         font-size: 0.875rem;
-        color: #6b7280;
+        color: var(--muted-text);
         padding: 0;
         margin: 0;
     }
@@ -318,7 +353,7 @@
         display: flex;
         gap: 1rem;
         font-size: 0.875rem;
-        color: #6b7280;
+        color: var(--muted-text);
     }
     .info-item {
         display: flex;
@@ -354,8 +389,8 @@
         font-weight: 600;
     }
     .item-count {
-        background: #f3f4f6;
-        color: #374151;
+        background: var(--item-bg);
+        color: var(--text-color);
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
         border-radius: 9999px;
@@ -371,13 +406,61 @@
     }
     .menu-item {
       border: 1px solid var(--border-color);
-      background: #fff;
+      background: var(--card-bg);
       border-radius: 12px;
       padding: 16px;
       box-shadow: var(--card-shadow);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
+    #dark-toggle {
+      position: fixed;
+      bottom: 30px;
+      right: 20px;
+      padding: 10px 20px;
+      background: transparent;
+      color: var(--text-color);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      transform-origin: center center; /* make sure scale is from center */
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
+    #dark-toggle svg {
+      width: 20px;
+      height: 20px;
+      position: absolute; /* stack on top of each other */
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: opacity 0.5s ease;
+      transform-origin: center center; /* scale from center if needed */
+    }
+
+    #dark-toggle:hover {
+        transform: scale(1.5);
+    }
+
+    #moon {
+      opacity: 1;
+    }
+
+    #sun {
+      opacity: 0;
+    }
+
+    :root.dark #moon {
+      opacity: 0;
+    }
+
+    :root.dark #sun {
+      opacity: 1;
+    }
+
+    
     .menu-item:hover {
       transform: translateY(-5px);
       box-shadow: rgba(0, 0, 0, 0.12) 0 6px 20px;
@@ -394,7 +477,7 @@
         width: 100%;
         height: 200px;
         object-fit: cover;
-        background: #f3f4f6;
+        background: var(--item-bg);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -428,7 +511,7 @@
         font-size: 0.875rem;
     }
     .item-description {
-        color: #6b7280;
+        color: var(--muted-text);
         font-size: 0.875rem;
         margin-bottom: 1rem;
     }
@@ -451,25 +534,27 @@
     .qty-btn {
         width: 2rem;
         height: 2rem;
-        border: 1px solid #d1d5db;
-        background: white;
+        border: 1px solid var(--border-color);
+        background: var(--card-bg);
         border-radius: 0.25rem;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
         font-size: 1rem;
+        color: var(--text-color)
     }
+
     .qty-btn:hover {
-        background: #f9fafb;
+        background: var(--item-bg);
     }
     .qty-btn:disabled {
         opacity: 0.5;
         cursor: not-allowed;
     }
     .add-btn {
-        background: #f97316;
-        color: white;
+        background: var(--accent-color);
+        color: var(--card-bg);
         border: none;
         padding: 0.5rem 1rem;
         border-radius: 0.25rem;
@@ -477,7 +562,7 @@
         font-weight: 500;
     }
     .add-btn:hover {
-        background: #ea580c;
+        background: var(--accent-hover);
     }
     .item-info h4 {
         font-weight: 500;
@@ -485,7 +570,7 @@
     }
     .item-info p {
         font-size: 0.75rem;
-        color: #6b7280;
+        color: var(--muted-text);
     }
     .item-controls {
         display: flex;
@@ -516,14 +601,16 @@
         margin-bottom: 0.25rem;
     }
     .form-select, .form-textarea {
-        border: 1px solid #d1d5db;
+        border: 1px solid var(--border-color);
         border-radius: 0.375rem;
         padding: 0.5rem 0.75rem;
         font-size: 0.875rem;
+        background-color: var(--item-bg);
+        color: var(--text-color);
     }
     .form-select:focus, .form-textarea:focus {
         outline: none;
-        border-color: #f97316;
+        border-color: var(--accent-color);
         box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
     }
     .form-textarea {
@@ -539,12 +626,12 @@
         margin-bottom: 1rem;
     }
     .total-price {
-        color: #f97316;
+        color: var(--accent-color);
     }
     .order-btn {
         width: 100%;
-        background: #f97316;
-        color: white;
+        background: var(--accent-color);
+        color: var(--text-color);
         border: none;
         padding: 0.75rem;
         border-radius: 0.375rem;
@@ -553,10 +640,10 @@
         font-size: 1rem;
     }
     .order-btn:hover {
-        background: #ea580c;
+        background: var(--accent-hover);
     }
     .order-btn:disabled {
-        background: #d1d5db;
+        background: var(--border-color);
         cursor: not-allowed;
     }
     .item-image {
