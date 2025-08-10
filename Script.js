@@ -8,6 +8,7 @@ const menuBtn2 = document.getElementById("btn-menu");
 const orderBtn = document.getElementById("btn-order")
 const cartBtn = document.getElementById("btn-cart");
 const orderSection = document.getElementById("orders-section")
+const floatBtn = document.getElementById("dark-toggle")
 
 
 const sections = {
@@ -138,6 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
       } else {
         alert("You must be logged in to order.");
       }
+    });
+
+    floatBtn.addEventListener('click', () => {
+      console.log("dark activated")
+      document.documentElement.classList.toggle('dark');
     });
 
     menuBtn2.addEventListener("click", () => {
