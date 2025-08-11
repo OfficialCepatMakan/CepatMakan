@@ -4,25 +4,161 @@
   <meta charset="UTF-8" />
   <title>Menu Manager</title>
   <style>
-  body {
-    font-family: Arial, sans-serif;
-  }
-  .menu-section { max-width: 800px; margin: 20px auto; }
-  .category-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-  .menu-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px; }
-  .menu-item { border: 1px solid #ccc; padding: 10px; border-radius: 6px; }
-  .item-image { background: #eee; height: 120px; display: flex; justify-content: center; align-items: center; font-weight: bold; margin-bottom: 8px; }
-  .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .item-actions { margin-top: 10px; display: flex; justify-content: space-between; align-items: center; }
-  .quantity-controls button { cursor: pointer; }
-  form { max-width: 400px; margin: 20px auto; padding: 15px; border: 1px solid #ddd; border-radius: 8px; background: #fafafa; }
-  form label { display: block; margin-bottom: 8px; font-weight: 600; }
-  form input { width: 100%; padding: 6px; margin-top: 4px; border-radius: 4px; border: 1px solid #ccc; }
-  form button { margin-top: 12px; padding: 10px; width: 100%; background: #28a745; color: white; border: none; border-radius: 6px; cursor: pointer; }
-  form button:hover { background: #218838; }
-  .item-image img { max-width: 100%; max-height: 100%; height: auto; width: auto; object-fit: contain; display: block; margin: 0 auto; }
-</style>
-
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-color, #fef7ed);
+      color: var(--text-color, #333);
+      margin: 0;
+      padding: 20px;
+    }
+    .menu-section {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .category-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .item-count {
+      color: var(--muted-text, #6b7280);
+      font-weight: 500;
+    }
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+    }
+    .menu-item {
+      background: var(--card-bg, #fff);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+      position: relative;
+    }
+    .menu-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    }
+    .item-image {
+      height: 140px;
+      background: var(--item-bg, #f3f4f6);
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+    .item-image img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .item-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    .item-name {
+      font-weight: 600;
+      font-size: 1.125rem;
+      color: var(--text-color, #333);
+    }
+    .item-price {
+      font-weight: 600;
+      color: var(--accent-color, #f97316);
+      border: 1px solid var(--accent-color, #f97316);
+      padding: 0.15rem 0.5rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+      white-space: nowrap;
+    }
+    .item-description {
+      color: var(--muted-text, #6b7280);
+      font-size: 0.875rem;
+      margin-bottom: 1rem;
+      flex-grow: 1;
+    }
+    .item-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .delete-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      color: var(--danger-color, #e00);
+      transition: background-color 0.2s ease, color 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .delete-btn:hover {
+      background-color: rgba(224, 0, 0, 0.1);
+      color: var(--danger-color, #a00);
+    }
+    .delete-btn svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+    }
+    form {
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      padding: 1rem;
+      background: var(--card-bg, #fff);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      border-radius: 12px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      color: var(--text-color, #333);
+    }
+    form input {
+      width: 95%;
+      padding: 8px 10px;
+      margin-top: 4px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color, #ccc);
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      background: var(--item-bg, #f3f4f6);
+      color: var(--text-color, #333);
+    }
+    form input:focus {
+      outline: none;
+      border-color: var(--accent-color, #f97316);
+      box-shadow: 0 0 6px var(--accent-color, #f97316);
+      background: #fff;
+    }
+    form button {
+      margin-top: 1rem;
+      padding: 12px;
+      width: 100%;
+      background: var(--accent-color, #f97316);
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    form button:hover {
+      background: var(--accent-hover, #ea580c);
+    }
+  </style>
 </head>
 <body>
   <section class="add-section">
@@ -37,7 +173,7 @@
       <label>Description:
         <input type="text" id="description" required />
       </label>
-      <label>Image text/URL:
+      <label>Image URL:
         <input type="text" id="image" required />
       </label>
       <button type="submit">Add to DB</button>
@@ -47,14 +183,14 @@
   <div class="main-content">
     <!-- Menu Section -->
     <section class="menu-section">
-      <h2>Our Menu</h2>
+      <div class="category-header">
+        <h2>Our Menu</h2>
+        <span class="item-count">0 items</span>
+      </div>
 
       <!-- Main Course -->
       <div class="category-section">
-        <div class="category-header">
-          <h3>Main Course</h3>
-          <span class="item-count">0 items</span>
-        </div>
+        <h3>Main Course</h3>
         <div class="menu-grid">
           <!-- Menu items get dynamically injected here -->
         </div>
@@ -66,13 +202,29 @@
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
-  <script src="firebase-config.js"></script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyDzIMXj13T1u7SWIEWIgQC5qUr-nVTzX14",
+      authDomain: "cepatmakan-fa681.firebaseapp.com",
+      databaseURL: "https://cepatmakan-fa681-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "cepatmakan-fa681",
+      storageBucket: "cepatmakan-fa681.appspot.com",
+      messagingSenderId: "964273406485",
+      appId: "1:964273406485:web:137588bd7b2dd5d6bcc41c",
+      measurementId: "G-JCQLDB0CLG"
+    };
+
+    // Initialize Firebase using compat globals:
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const db = firebase.database();  // <-- compat style
+  </script>
   <script>
     const menuGrid = document.querySelector('.menu-grid');
     const itemCount = document.querySelector('.item-count');
     const form = document.getElementById('menuForm');
 
-    // Function to load menu items from Firebase
+    // Load menu items from Firebase
     function loadMenu() {
       const mainCourseRef = db.ref('menu/main_course');
       mainCourseRef.once('value', snapshot => {
@@ -84,22 +236,44 @@
           const item = items[key];
           count++;
 
+          // Create menu item element
           const menuItem = document.createElement('div');
           menuItem.className = 'menu-item';
+
           menuItem.innerHTML = `
-            <div class="item-image"><img src="${item.image}"></img></div>
+            <div class="item-image"><img src="${item.image}" alt="${item.name}"></div>
             <div class="item-content">
               <div class="item-header">
                 <h4 class="item-name">${item.name}</h4>
                 <span class="item-price">Rp ${item.price.toLocaleString('id-ID')}</span>
               </div>
               <p class="item-description">${item.description}</p>
-              </div>
+            </div>
+            <div class="item-actions">
+              <button class="delete-btn" title="Delete item" aria-label="Delete ${item.name}">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
             </div>
           `;
+
+          // Attach delete handler
+          menuItem.querySelector('.delete-btn').addEventListener('click', () => {
+            if(confirm(`Are you sure you want to delete "${item.name}"?`)) {
+              db.ref('menu/main_course/' + key).remove()
+                .then(() => {
+                  alert(`Deleted "${item.name}"`);
+                  loadMenu();
+                })
+                .catch(err => alert('Error deleting item: ' + err.message));
+            }
+          });
+
           menuGrid.appendChild(menuItem);
         }
-        itemCount.textContent = `${count} items`;
+
+        itemCount.textContent = `${count} item${count !== 1 ? 's' : ''}`;
       });
     }
 
