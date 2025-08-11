@@ -158,9 +158,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark") {
         root.classList.add("dark");
-        darkIcon.innerHTML = moonSVG;
-    } else {
         darkIcon.innerHTML = sunSVG;
+    } else {
+        darkIcon.innerHTML = moonSVG;
     }
 
     darkToggle.addEventListener("click", () => {
@@ -462,6 +462,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
