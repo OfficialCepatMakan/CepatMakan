@@ -389,7 +389,7 @@
         font-weight: 600;
     }
     .item-count {
-        background: #2a2a2a;
+        background: var(--item-bg);
         color: var(--text-color);
         font-size: 0.75rem;
         padding: 0.25rem 0.5rem;
@@ -675,5 +675,6 @@
             grid-template-columns: 1fr;
         }
     }
+
 
 
