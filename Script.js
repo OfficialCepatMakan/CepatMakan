@@ -147,13 +147,14 @@ document.addEventListener("DOMContentLoaded", () => {
       // Apply saved theme on load
       if (localStorage.getItem("theme") === "dark") {
         root.classList.add("dark");
-        darkToggle.textContent = "☀️";
+        darkToggle.innerHTML = `<path fill="currentColor" d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8zM1 13h3v-2H1zm10 9h2v-3h-2zm9-9h3v-2h-3zm-4.24 7.16l1.8 1.79 1.41-1.41-1.79-1.8zM17 13a5 5 0 1 1-5-5 5 5 0 0 1 5 5z"/>` ;
       }
 
       // Toggle theme
       darkToggle.addEventListener("click", () => {
         root.classList.toggle("dark");
         const isDark = root.classList.contains("dark");
+        const darkIcon = document.getElementById("dark-icon");
         if (isDark) {
           darkIcon.innerHTML = `<path fill="currentColor" d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8zM1 13h3v-2H1zm10 9h2v-3h-2zm9-9h3v-2h-3zm-4.24 7.16l1.8 1.79 1.41-1.41-1.79-1.8zM17 13a5 5 0 1 1-5-5 5 5 0 0 1 5 5z"/>`; // sun
         } else {
@@ -452,6 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
