@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Apply saved theme on load
       if (localStorage.getItem("theme") === "dark") {
         root.classList.add("dark");
-        darkToggle.innerHTML = `<path fill="currentColor" d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8zM1 13h3v-2H1zm10 9h2v-3h-2zm9-9h3v-2h-3zm-4.24 7.16l1.8 1.79 1.41-1.41-1.79-1.8zM17 13a5 5 0 1 1-5-5 5 5 0 0 1 5 5z"/>` ;
+        darkToggle.innerHTML = `<svg id="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>` ;
       }
 
       // Toggle theme
@@ -156,9 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const isDark = root.classList.contains("dark");
         const darkIcon = document.getElementById("dark-icon");
         if (isDark) {
-          darkIcon.innerHTML = `<path fill="currentColor" d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8zM1 13h3v-2H1zm10 9h2v-3h-2zm9-9h3v-2h-3zm-4.24 7.16l1.8 1.79 1.41-1.41-1.79-1.8zM17 13a5 5 0 1 1-5-5 5 5 0 0 1 5 5z"/>`; // sun
+          darkIcon.innerHTML = `<svg id="sun" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" /></svg>`; // sun
         } else {
-          darkIcon.innerHTML = `<path fill="currentColor" d="M21 12.79A9 9 0 0 1 11.21 3a7 7 0 1 0 9.79 9.79z"/>`; // moon
+          darkIcon.innerHTML = `<svg id="moon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width: 20px; height: 20px;"><path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" /></svg>`; // moon
         }
         localStorage.setItem("theme", isDark ? "dark" : "light");
       });
@@ -453,6 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
