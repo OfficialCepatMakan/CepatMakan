@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
                   </svg>
                 </button>`;
               EmailP = `
-                <p><strong>Email:</strong> Rp${order.mail()}</p>
+                <p><strong>Email:</strong> Rp${order.mail}</p>
               `
             }
           
@@ -466,6 +466,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
