@@ -141,10 +141,22 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    floatBtn.addEventListener('click', () => {
-      console.log("dark activated")
-      document.documentElement.classList.toggle('dark');
-    });
+      const root = document.documentElement;
+      const darkToggle = document.getElementById("dark-toggle");
+
+      // Apply saved theme on load
+      if (localStorage.getItem("theme") === "dark") {
+        root.classList.add("dark");
+        darkToggle.textContent = "☀️";
+      }
+
+      // Toggle theme
+      darkToggle.addEventListener("click", () => {
+        root.classList.toggle("dark");
+        const isDark = root.classList.contains("dark");
+        darkToggle.textContent = isDark ? "☀️" : "🌙";
+        localStorage.setItem("theme", isDark ? "dark" : "light");
+      });
 
     menuBtn2.addEventListener("click", () => {
         menuSection.style.display = "grid";
@@ -436,4 +448,5 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
