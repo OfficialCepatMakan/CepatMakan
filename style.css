@@ -513,6 +513,10 @@
     .item-description {
         color: var(--muted-text);
         font-size: 0.875rem;
+    }
+       .item-stock {
+        color: var(--muted-text);
+        font-size: 0.875rem;
         margin-bottom: 1rem;
     }
     .ice-option {
@@ -675,6 +679,7 @@
             grid-template-columns: 1fr;
         }
     }
+
 
 
 
