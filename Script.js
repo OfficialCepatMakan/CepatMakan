@@ -288,6 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <p class="item-description">${item.description}</p>
         <div class="item-actions">
           <div class="quantity-controls">
+            <p class="item-stock">${item.stock}</p>
             <button class="qty-btn" disabled>−</button>
             <span>0</span>
             <button class="qty-btn">+</button>
@@ -466,6 +467,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
