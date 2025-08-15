@@ -463,7 +463,8 @@ document.addEventListener("DOMContentLoaded", () => {
           key: key,
           name: item.name,
           price: item.price,
-          quantity: quantity
+          quantity: quantity,
+          stock: item.stock
         });
       }
 
@@ -475,4 +476,5 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
