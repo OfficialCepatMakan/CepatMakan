@@ -358,8 +358,12 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       plusBtn.addEventListener('click', () => {
-        item.quantity++;
-        updateCartDisplay();
+        if (item.quantity < item.stock){
+          item.quantity++;
+          updateCartDisplay();
+        } else {
+          return;
+        }
       });
 
       cartItemsContainer.appendChild(cartItem);
@@ -471,6 +475,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
