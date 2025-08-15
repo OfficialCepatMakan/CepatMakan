@@ -356,7 +356,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         updateCartDisplay();
       });
-
+      console.log(item.stock)
       plusBtn.addEventListener('click', () => {
         if (item.quantity < item.stock){
           item.quantity++;
@@ -475,21 +475,4 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
