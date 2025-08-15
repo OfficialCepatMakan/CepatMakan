@@ -437,7 +437,8 @@ document.addEventListener("DOMContentLoaded", () => {
           if (quantity < stock){
             quantity++;
           } else {
-            return
+            return;
+          }
         } else if (btn.textContent === '−' && quantity > 0) {
           quantity--;
         }
@@ -470,6 +471,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
