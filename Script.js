@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     `;
 
-    setupQuantityLogic(menuItem, key, item);
+    setupQuantityLogic(menuItem, key, item, item.stock);
     return menuItem;
   }
   function updateCartDisplay() {
@@ -424,7 +424,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-  function setupQuantityLogic(menuItem, key, item) {
+  function setupQuantityLogic(menuItem, key, item, stock) {
     const qtyBtns = menuItem.querySelectorAll('.qty-btn');
     const qtyDisplay = menuItem.querySelector('.quantity-controls span');
     const addToCartBtn = menuItem.querySelector('.add-btn');
@@ -434,7 +434,10 @@ document.addEventListener("DOMContentLoaded", () => {
     qtyBtns.forEach((btn) => {
       btn.addEventListener('click', () => {
         if (btn.textContent === '+') {
-          quantity++;
+          if (quantity < stock){
+            quantity++;
+          } else {
+            return
         } else if (btn.textContent === '−' && quantity > 0) {
           quantity--;
         }
