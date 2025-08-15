@@ -362,6 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (item.quantity < item.stock){
           item.quantity++;
           updateCartDisplay();
+          alert("This is the maximum stock!");
         } else {
           return;
         }
@@ -442,6 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
           if (quantity < stock){
             quantity++;
           } else {
+            alert("This is the maximum stock!");
             return;
           }
         } else if (btn.textContent === '−' && quantity > 0) {
@@ -477,6 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
