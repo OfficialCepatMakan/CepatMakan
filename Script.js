@@ -329,6 +329,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cart.forEach((item) => {
       totalItems += item.quantity;
       totalPrice += item.price * item.quantity;
+      console.log(item)
 
       const cartItem = document.createElement('div');
       cartItem.className = 'cart-item';
@@ -476,5 +477,6 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
