@@ -433,7 +433,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
           // 🔄 Update stock (transaction prevents race conditions)
           cart.forEach(item => {
-            const itemRef = db.ref(`menu/main_course/${item.id}/stock`);
+            const itemRef = db.ref(`menu/main_course/${item.key}/stock`);
             itemRef.transaction(currentStock => {
               if (currentStock === null) return 0;
               return currentStock - item.quantity;
@@ -501,6 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
