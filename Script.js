@@ -398,10 +398,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const stockRef = db.ref('menu/main_course');
     console.log(cart)
 
-    for (all in cart){
-      console.log(cart)
+    for (const item of cart) {
+      console.log(item);
     }
-  
+    
     const ordersRef = db.ref('Orders');
   
     const orderData = {
@@ -485,6 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
