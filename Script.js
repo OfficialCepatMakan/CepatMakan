@@ -402,6 +402,7 @@ document.addEventListener("DOMContentLoaded", () => {
       for (const item of cart) {
         const itemData = menuData[item.key];
         console.log(itemData)
+        console.log(item.key)
         if (!itemData) {
           alert(`Item ${item.key} not found in database`);
           return;
