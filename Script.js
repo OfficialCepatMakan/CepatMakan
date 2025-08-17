@@ -180,6 +180,19 @@ document.addEventListener("DOMContentLoaded", () => {
         menuSection.style.display = "grid";
         cartSection.style.display = "none";
         orderSection.style.display = "none";
+        mainCourseRef.once('value', (snapshot) => {
+          const items = snapshot.val();
+          const menuGrid = document.querySelector('.menu-grid');
+          let count = 0;
+    
+          menuGrid.innerHTML = ''; // Clear existing items
+    
+          for (let key in items) {
+            const item = items[key];
+            const menuItem = createMenuItem(key, item);
+            menuGrid.appendChild(menuItem);
+            count++;
+          }
       });
       cartBtn.addEventListener("click", () => {
         menuSection.style.display = "none";
@@ -258,18 +271,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   
     mainCourseRef.once('value', (snapshot) => {
-    const items = snapshot.val();
-    const menuGrid = document.querySelector('.menu-grid');
-    let count = 0;
+      const items = snapshot.val();
+      const menuGrid = document.querySelector('.menu-grid');
+      let count = 0;
     
-    menuGrid.innerHTML = ''; // Clear existing items
+      menuGrid.innerHTML = ''; // Clear existing items
     
-    for (let key in items) {
-      const item = items[key];
-      const menuItem = createMenuItem(key, item);
-      menuGrid.appendChild(menuItem);
-      count++;
-    }
+      for (let key in items) {
+        const item = items[key];
+        const menuItem = createMenuItem(key, item);
+        menuGrid.appendChild(menuItem);
+        count++;
+      }
   
     document.querySelector('.item-count').textContent = `${count} items`;
   });
@@ -501,6 +514,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
