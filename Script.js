@@ -384,26 +384,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const className = document.getElementById('class').value || '';
     const paymentMethod = document.getElementById('paymentmethod').value || '';
     const name = document.getElementById('name').value || '';
-  
-    // Validation (use OR `||` instead of AND `&&` to catch any empty field)
-    if (
-      grade.trim() === '' ||
-      className.trim() === '' ||
-      paymentMethod.trim() === '' ||
-      name.trim() === ''
-    ) {
+
+    // Validation
+    if (!grade.trim() || !className.trim() || !paymentMethod.trim() || !name.trim()) {
       alert("Please fill all fields");
       return;
     }
+
     const stockRef = db.ref('menu/main_course');
+    const ordersRef = db.ref('Orders');
 
     stockRef.once('value').then(snapshot => {
       const menuData = snapshot.val();
       console.log("Menu data:", menuData);
 
-      // Loop cart and validate stock
+      // ✅ Validate stock
       for (const item of cart) {
-        const itemData = menuData[item.id]; // item.id = "-OXhji2GLwR_eZo4eSa1"
+        const itemData = menuData[item.id]; // item.id must be "-OXhji2GLwR_eZo4eSa1"
         if (!itemData) {
           alert(`Item ${item.name} not found in database`);
           return;
@@ -414,42 +411,43 @@ document.addEventListener("DOMContentLoaded", () => {
         }
       }
 
-      // If valid, push order
-      ordersRef.push(orderData);
-    
-    const ordersRef = db.ref('Orders');
-  
-    const orderData = {
-      name: name,
-      grade: grade,
-      class: className,
-      paymentMethod: paymentMethod,
-      items: cart,
-      total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      mail: mail,
-      timestamp: new Date().toISOString()
-      
-    };
-  
-    ordersRef.push(orderData)
-      .then(() => {
-        console.log('Order saved successfully.');
-        alert("Order submitted!");
-      
-        // 🔁 Clear the cart array (in-place)
-        cart.length = 0;
-      
-        // 🔄 Update UI
-        updateCartDisplay();
-      })
-      .catch((error) => {
-        console.error('Error saving order:', error);
-        alert('Something went wrong, order not sent!');
-      });
+      // ✅ Build order object
+      const orderData = {
+        name,
+        grade,
+        class: className,
+        paymentMethod,
+        items: cart,
+        total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+        mail,
+        timestamp: new Date().toISOString()
+      };
+
+      // ✅ Push order
+      ordersRef.push(orderData)
+        .then(() => {
+          console.log('Order saved successfully.');
+          alert("Order submitted!");
+
+          // 🔄 Update stock (transaction prevents race conditions)
+          cart.forEach(item => {
+            const itemRef = db.ref(`menu/main_course/${item.id}/stock`);
+            itemRef.transaction(currentStock => {
+              if (currentStock === null) return 0;
+              return currentStock - item.quantity;
+            });
+          });
+
+          // 🔁 Clear cart
+          cart.length = 0;
+          updateCartDisplay();
+        })
+        .catch((error) => {
+          console.error('Error saving order:', error);
+          alert('Something went wrong, order not sent!');
+        });
+    });
   }
-
-
-
 
   function setupQuantityLogic(menuItem, key, item, stock) {
     const qtyBtns = menuItem.querySelectorAll('.qty-btn');
@@ -500,10 +498,3 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
-
-
-
-
-
-
-
