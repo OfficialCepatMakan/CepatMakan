@@ -401,6 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ Validate stock
       for (const item of cart) {
         const itemData = menuData[item.key]; // item.id must be "-OXhji2GLwR_eZo4eSa1"
+        console.log(item.key)
         if (!itemData) {
           alert(`Item ${item.name} not found in database`);
           return;
@@ -481,6 +482,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (existing) {
         existing.quantity += quantity;
       } else {
+        console.log(key)
         cart.push({
           key: key,
           name: item.name,
@@ -498,4 +500,5 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
