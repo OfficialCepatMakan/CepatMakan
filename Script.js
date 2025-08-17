@@ -395,6 +395,11 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Please fill all fields");
       return;
     }
+    const stockRef = db.ref('menu/main_course');
+
+    for (all in cart){
+      console.log(cart)
+    }
   
     const ordersRef = db.ref('Orders');
   
@@ -479,6 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
