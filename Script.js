@@ -362,9 +362,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (item.quantity < item.stock){
           item.quantity++;
           updateCartDisplay();
-          alert("This is the maximum stock!");
         } else {
           return;
+          alert("This is the maximum stock!");
         }
       });
 
@@ -396,6 +396,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     const stockRef = db.ref('menu/main_course');
+    console.log(cart)
 
     for (all in cart){
       console.log(cart)
@@ -484,6 +485,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
