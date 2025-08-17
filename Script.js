@@ -396,11 +396,26 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     const stockRef = db.ref('menu/main_course');
-    console.log(cart)
 
-    for (const item of cart) {
-      console.log(item);
-    }
+    stockRef.once('value').then(snapshot => {
+      const menuData = snapshot.val();
+      console.log("Menu data:", menuData);
+
+      // Loop cart and validate stock
+      for (const item of cart) {
+        const itemData = menuData[item.id]; // item.id = "-OXhji2GLwR_eZo4eSa1"
+        if (!itemData) {
+          alert(`Item ${item.name} not found in database`);
+          return;
+        }
+        if (item.quantity > itemData.stock) {
+          alert(`Not enough stock for ${item.name}`);
+          return;
+        }
+      }
+
+      // If valid, push order
+      ordersRef.push(orderData);
     
     const ordersRef = db.ref('Orders');
   
