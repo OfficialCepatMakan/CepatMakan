@@ -400,7 +400,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // ✅ Validate stock
       for (const item of cart) {
-        const itemData = menuData[item.id]; // item.id must be "-OXhji2GLwR_eZo4eSa1"
+        const itemData = menuData[item.key]; // item.id must be "-OXhji2GLwR_eZo4eSa1"
         if (!itemData) {
           alert(`Item ${item.name} not found in database`);
           return;
@@ -498,3 +498,4 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
