@@ -45,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(response => response.json())
       .then(data => {
         adminEmails = data.adminEmails;
-        console.log("Loaded admin emails:", adminEmails);
   
       })
       .catch(error => {
@@ -53,8 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
     function fetchAndRenderOrders(mail, admins) {
-      console.log(mail);
-      console.log(admins);
       const ordersRef = db.ref('Orders');
       const ordersList = document.getElementById('orders-list');
       ordersList.innerHTML = ''; // clear existing orders
@@ -137,8 +134,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const user = firebase.auth().currentUser;
 
       if (user) {
-        console.log("Signed in user:", user);
-        console.log("user.email = ", user.email);
         SendOrder(cart, user.email); // ✅ email is now defined
       } else {
         alert("You must be logged in to order.");
@@ -203,7 +198,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log("User signed in:", user.displayName);
 
         // Clear container first
         authContainer.innerHTML = "";
@@ -237,7 +231,6 @@ document.addEventListener("DOMContentLoaded", () => {
         signInBtn.addEventListener("click", () => {
           auth.signInWithPopup(provider)
             .then((result) => {
-              console.log("Signed in as", result.user.displayName);
               user = result.user.displayName
             })
             .catch((error) => {
@@ -329,7 +322,6 @@ document.addEventListener("DOMContentLoaded", () => {
     cart.forEach((item) => {
       totalItems += item.quantity;
       totalPrice += item.price * item.quantity;
-      console.log(item)
 
       const cartItem = document.createElement('div');
       cartItem.className = 'cart-item';
@@ -357,7 +349,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         updateCartDisplay();
       });
-      console.log(item.stock)
       plusBtn.addEventListener('click', () => {
         if (item.quantity < item.stock){
           item.quantity++;
@@ -396,13 +387,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     stockRef.once('value').then(snapshot => {
       const menuData = snapshot.val();
-      console.log("Menu data:", menuData);
 
       // ✅ Validate stock
       for (const item of cart) {
         const itemData = menuData[item.key];
-        console.log(itemData)
-        console.log(item.key)
         if (!itemData) {
           alert(`Item ${item.key} not found in database`);
           return;
@@ -428,7 +416,6 @@ document.addEventListener("DOMContentLoaded", () => {
       // ✅ Push order
       ordersRef.push(orderData)
         .then(() => {
-          console.log('Order saved successfully.');
           alert("Order submitted!");
 
           // 🔄 Update stock (transaction prevents race conditions)
@@ -483,7 +470,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (existing) {
         existing.quantity += quantity;
       } else {
-        console.log(key)
+        alert("The item has been saved to cart, press the 3 dots tab to open cart")
         cart.push({
           key: key,
           name: item.name,
@@ -501,3 +488,4 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
