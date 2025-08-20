@@ -185,6 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         orderSection.style.display = "block";
 
         const user = firebase.auth().currentUser;
+        console.log(user)
         if (user && user.email) {
           fetchAndRenderOrders(user.email, adminEmails);
           
@@ -488,4 +489,5 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
