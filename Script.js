@@ -94,8 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
               <p><strong>Payment:</strong> ${order.paymentMethod}</p>
               <p><strong>Items:</strong>${itemsHTML}</p>
               <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
-              <p><strong>Email:</strong> ${order.mail}</p>
               <p><strong>Notes*:</strong> ${order.notes}</p>
+              <p><strong>Email:</strong> ${order.mail}</p>
               ${deleteButtonHTML}
             `;
           
@@ -489,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
