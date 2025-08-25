@@ -95,6 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
               <p><strong>Items:</strong>${itemsHTML}</p>
               <p><strong>Total:</strong> Rp${order.total.toLocaleString()}</p>
               <p><strong>Email:</strong> ${order.mail}</p>
+              <p><strong>Notes*:</strong> ${order.notes}</p>
               ${deleteButtonHTML}
             `;
           
@@ -373,6 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const className = document.getElementById('class').value || '';
     const paymentMethod = document.getElementById('paymentmethod').value || '';
     const name = document.getElementById('name').value || '';
+    const notes = document.getElementById('Notes').value || '';
 
     // Validation
     if (!grade.trim() || !className.trim() || !paymentMethod.trim() || !name.trim()) {
@@ -407,6 +409,7 @@ document.addEventListener("DOMContentLoaded", () => {
         paymentMethod,
         items: cart,
         total: cart.reduce((sum, item) => sum + item.price * item.quantity, 0),
+        notes: notes,
         mail,
         timestamp: new Date().toISOString()
       };
@@ -486,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartDisplay();
     });
   }
+
 
 
 
